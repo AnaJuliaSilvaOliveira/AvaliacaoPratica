@@ -1,6 +1,10 @@
 import requests
 
 def get_data(api_url, input_id):
+    '''
+        Estabelece uma conexão com a API, realiza a solicitação de dados e os converte para o formato JSON.
+        Caso ocorra algum erro durante a operação, uma mensagem de erro personalizada é retornada.
+    '''
     try:
         response = requests.get(f"{api_url}/{input_id}")
         response.raise_for_status()
@@ -10,6 +14,9 @@ def get_data(api_url, input_id):
         return None
 
 def categorize_age(age):
+    '''
+        Categoriza faixa etária. 
+    '''
     if age < 30:
         return "Jovem"
     elif 30 <= age <= 40:
@@ -18,7 +25,11 @@ def categorize_age(age):
         return "Sênior"
 
 def main():
-    api_url = "http://localhost:5000/api/dados"  # Substitua pelo URL real da API
+    '''
+        Recebe input do usuário e chama os métodos get_data e categorize_age com esta informação.
+        Organiza e escreve as informações referentes ao ID escolhido pelo usuário e a faixa etária pertencente. 
+    '''
+    api_url = "http://localhost:5226/"
     input_id = input("Digite o ID de interesse: ")
     
     data = get_data(api_url, input_id)
